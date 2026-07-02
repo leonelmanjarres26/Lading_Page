@@ -6,11 +6,100 @@
     <title>Programacion sin Internet</title>
 </head>
 <body>
-     <header class="nav">
+     <!--Navbar-->
+    <header class="nav">
         <div class="contenedor">
-             
+          <div class="logo"><span>Error 404</span></div>
+          <a href="#registro" class="btn-nav">Solicitar piloto</a>   
+        </div>        
+     </header> 
+     
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="contenedor">
+      <div>
+        <h1>Enseña <em>programación sin internet</em> en tu colegio rural</h1>
+        <p class="sub">Metodología unplugged + kit digital híbrido 4.0 que lleva el pensamiento computacional al aula desconectada de Santa Ana, Magdalena. Sin antenas costosas. Sin papeleo eterno.</p>
+        <span class="badge-incentivo">🎁 Cupo gratuito para las 5 primeras instituciones del piloto</span>
+      </div>
+
+      <!-- FORMULARIO (CTA principal, pocos campos) -->
+      <div class="form-card" id="registro">
+        <h3>Reserva el piloto para tu institución</h3>
+        <p class="mini">Solo 2 datos. Te contactamos para una demostración.</p>
+        <form id="formRegistro">
+          <label for="nombre">Nombre y cargo</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ej: Patricia Londoño, Coordinadora" required />
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tucorreo@institucion.edu.co" required />
+          <button type="submit">Quiero la demostración gratis</button>
+          <p class="privacidad">🔒 No compartimos tus datos. Cero spam.</p>
+        </form>
+        <div class="ok-msg" id="okMsg">✅ ¡Gracias! Recibimos tu registro. Te contactaremos muy pronto.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BENEFICIOS ========== -->
+  <section class="seccion">
+    <div class="contenedor">
+      <h2>Lo que logras con C6 Error 404</h2>
+      <p class="intro">Tres resultados concretos para la coordinación académica, no características técnicas.</p>
+      <div class="grid3">
+        <div class="card">
+          <span class="ic">📶</span>
+          <h4>Rompe la barrera de conectividad</h4>
+          <p>Funciona 100% offline gracias a la arquitectura híbrida 4.0. Deja de depender de antenas satelitales que desbordan el presupuesto público.</p>
         </div>
-        <h1>Programacion sin Internet</h1>
-     </header>   
+        <div class="card">
+          <span class="ic">📊</span>
+          <h4>Mide y muestra tu impacto</h4>
+          <p>Recibes un dashboard con estadísticas reales del progreso en pensamiento computacional, listo para tus rendiciones de cuentas y ruedas de prensa.</p>
+        </div>
+        <div class="card">
+          <span class="ic">⚡</span>
+          <h4>Escala sin fricción legal</h4>
+          <p>Distribuye a decenas de escuelas a la vez con un borrador de convenio ya estructurado. Cero colapso burocrático para tu equipo jurídico.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRUEBA SOCIAL ========== -->
+  <section class="seccion social">
+    <div class="contenedor">
+      <h2>Una iniciativa que ya está en movimiento</h2>
+      <p class="intro" style="color:#cfd8e8;">Semillero C6 Error 404 — Corporación Unificada Nacional (CUN), Magdalena.</p>
+      <div class="cifras">
+        <div class="cifra"><div class="n" id="cVis">0</div><div class="l">Personas visitaron la página</div></div>
+        <div class="cifra"><div class="n" id="cReg">0</div><div class="l">Dejaron su correo</div></div>
+        <div class="cifra"><div class="n" id="cFb">0</div><div class="l">Dieron feedback</div></div>
+      </div>
+      <div class="compartir">
+        <p>¿Conoces una institución rural que lo necesita? Comparte el link:</p>
+        <a class="wa" href="https://wa.me/?text=Conoce%20C6%20Error%20404,%20programaci%C3%B3n%20sin%20internet%20para%20colegios%20rurales:%20" target="_blank" rel="noopener">Compartir por WhatsApp</a>
+        <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a class="link-copiar" href="#" onclick="copiarLink(event)">Copiar enlace</a>
+      </div>
+    </div>
+  </section>
+
+    <!-- ========== CTA FINAL ========== -->
+  <section class="cta-final">
+    <div class="contenedor">
+      <h2>Tu institución puede ser pionera en innovación educativa rural</h2>
+      <p>Sin conectividad. Sin costos ocultos. Con impacto medible.</p>
+      <a href="#registro">Solicitar demostración gratuita</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="contenedor">
+      <p><strong>C6 Error 404</strong> — Guía Metodológica de Lógica de Programación · Semillero de Investigación · Santa Ana, Magdalena, Colombia</p>
+      <p style="margin-top:8px;">MVP de validación temprana — Método Mago de Oz · 2026</p>
+    </div>
+  </footer>
+     
 </body>
 </html>
