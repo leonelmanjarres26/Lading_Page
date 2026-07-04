@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia Metodologica de Programacion</title>
+    <title>Guía metodológica de programación</title>
     <link rel="stylesheet" href="style.css">
+    <script src="/script.js"></script>
 </head>
 <body>
      <!--Navbar-->
     <header class="nav">
         <div class="contenedor">
-          <div class="logo"><span>Guia Metodologica de Programacion</span></div>
-          <a href="#registro" class="btn-nav">Solicitar piloto</a>   
+          <div class="logo"><span>Guía metodológica de programación</span></div>
+          <a href="#registro" class="btn-nav">Solicitar Prueba Piloto</a>   
         </div>        
      </header> 
      
@@ -44,7 +45,7 @@
   <!-- ========== BENEFICIOS ========== -->
   <section class="seccion">
     <div class="contenedor">
-      <h2>Lo que logras con la Guia Metodologica de Programacion</h2>
+      <h2>Lo que logras con la Guía metodológica de programación</h2>
       <p class="intro">Tres resultados concretos para la coordinación académica, no características técnicas.</p>
       <div class="grid3">
         <div class="card">
@@ -76,6 +77,15 @@
         <div class="cifra"><div class="n" id="cReg">0</div><div class="l">Dejaron su correo</div></div>
         <div class="cifra"><div class="n" id="cFb">0</div><div class="l">Dieron feedback</div></div>
       </div>
+      <div class="feedback-widget">
+        <p>¿Esta propuesta te parece útil para tu institución?</p>
+        <div class="fb-botones">
+          <button type="button" class="fb-btn" onclick="darFeedback(event,'up')">👍 Sí</button>
+          <button type="button" class="fb-btn" onclick="darFeedback(event,'down')">👎 No</button>
+        </div>
+        <p class="fb-gracias" id="fbGracias">¡Gracias por tu opinión!</p>
+      </div>
+
       <div class="compartir">
         <p>¿Conoces una institución rural que lo necesita? Comparte el link:</p>
         <a class="wa" href="https://wa.me/?text=Conoce%20C6%20Error%20404,%20programaci%C3%B3n%20sin%20internet%20para%20colegios%20rurales:%20" target="_blank" rel="noopener">Compartir por WhatsApp</a>
@@ -99,6 +109,7 @@
     <div class="contenedor">
       <p><strong>Guía Metodológica de Lógica de Programación</strong>  · Santa Ana, Magdalena, Colombia</p>
       <p style="margin-top:8px;">MVP de validación temprana — Método Mago de Oz · 2026</p>
+      &copy; <span id="anio"></span> Leonel David Manjarres Perez — Luis Alejandro Ortiz Pineda
     </div>
   </footer>
      

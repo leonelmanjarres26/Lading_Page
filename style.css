@@ -57,6 +57,14 @@
     .cifra{background:rgba(255,255,255,.06);border-radius:14px;padding:26px;}
     .cifra .n{font-size:2.4rem;font-weight:800;color:var(--amarillo);}
     .cifra .l{font-size:.92rem;color:#cfd8e8;}
+    .feedback-widget{margin-top:10px;}
+    .feedback-widget p{color:#cfd8e8;margin-bottom:14px;}
+    .fb-botones{display:flex;justify-content:center;gap:12px;}
+    .fb-btn{background:#1e3a63;color:#fff;border:1.5px solid rgba(255,255,255,.3);padding:10px 20px;border-radius:8px;font-weight:700;font-size:.9rem;cursor:pointer;transition:.2s;}
+    .fb-btn:hover:not(:disabled){background:#2a4d82;}
+    .fb-btn:disabled{opacity:.5;cursor:default;}
+    .fb-gracias{display:none;color:var(--amarillo);font-weight:700;margin-top:12px;font-size:.9rem;}
+
     .compartir{margin-top:10px;}
     .compartir p{color:#cfd8e8;margin-bottom:16px;}
     .compartir a{display:inline-block;margin:6px;padding:11px 20px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.9rem;}
