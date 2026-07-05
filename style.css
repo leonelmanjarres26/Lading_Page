@@ -40,6 +40,27 @@
     .badge-incentivo{display:inline-block;background:#fff4c2;color:#8a6d00;font-size:.78rem;font-weight:700;padding:6px 12px;border-radius:20px;margin-bottom:22px;}
     .ok-msg{display:none;background:#e7f9ee;border:1.5px solid var(--verde);color:#0f7a34;padding:14px;border-radius:9px;font-size:.92rem;margin-top:8px;}
 
+/* PREGUNTAS */
+    .faq-lista{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px;}
+    .pregunta-item{background:var(--claro);border-radius:12px;padding:18px 22px;border-left:4px solid var(--amarillo);}
+    .pregunta-item label{display:block;font-weight:700;color:var(--azul);font-size:1.02rem;margin-bottom:10px;}
+    .pregunta-item textarea{width:100%;padding:12px 14px;border:1.5px solid #d7dde8;border-radius:9px;font-size:.95rem;font-family:inherit;resize:vertical;}
+    .pregunta-item textarea:focus{outline:none;border-color:var(--azul);}
+    #formPreguntas button{align-self:center;background:var(--verde);color:#fff;border:none;padding:14px 34px;border-radius:9px;font-size:1.05rem;font-weight:700;cursor:pointer;transition:.2s;}
+    #formPreguntas button:hover{background:#17a044;}
+    #formPreguntas button:disabled{opacity:.6;cursor:default;}
+
+    /* FAQ acordeón interactivo */
+    .faq-item{background:var(--claro);border-radius:12px;border-left:4px solid var(--amarillo);transition:background .2s,box-shadow .2s;overflow:hidden;}
+    .faq-item:hover{background:#eef1f8;}
+    .faq-item[open]{box-shadow:0 10px 24px rgba(11,30,63,.1);}
+    .faq-item summary{cursor:pointer;font-weight:700;color:var(--azul);font-size:1.02rem;list-style:none;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+    .faq-item summary::-webkit-details-marker{display:none;}
+    .faq-item summary::after{content:'+';flex-shrink:0;font-weight:800;color:var(--azul);font-size:1.4rem;line-height:1;transition:transform .25s ease;}
+    .faq-item[open] summary::after{transform:rotate(45deg);}
+    .faq-item p{color:var(--gris);margin:0 22px 20px;font-size:.95rem;animation:faqFade .25s ease;}
+    @keyframes faqFade{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+
 /* BENEFICIOS */
     .seccion{padding:70px 0;}
     .seccion h2{text-align:center;font-size:2rem;color:var(--azul);margin-bottom:8px;font-weight:800;}

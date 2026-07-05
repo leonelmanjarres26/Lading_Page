@@ -69,6 +69,38 @@ document.getElementById('formRegistro').addEventListener('submit', async functio
   }
 });
 
+/* Formulario de Preguntas frecuentes para docentes: envía las 3 respuestas a la misma
+   Google Sheet vía Apps Script. Requiere que el Apps Script guarde los campos p1, p2 y p3
+   (por ejemplo en una hoja/columnas nuevas) cuando reciba accion=preguntas. */
+document.getElementById('formPreguntas').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const form = e.target;
+  const boton = form.querySelector('button[type="submit"]');
+
+  const formData = new FormData();
+  formData.append('accion', 'preguntas');
+  formData.append('p1', form.p1.value);
+  formData.append('p2', form.p2.value);
+  formData.append('p3', form.p3.value);
+
+  boton.disabled = true;
+  boton.textContent = 'Enviando...';
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData });
+    const resultado = await res.json();
+    if (!res.ok || resultado.result !== 'success') throw new Error('Apps Script respondió con error');
+
+    form.style.display = 'none';
+    document.getElementById('okMsgPreguntas').style.display = 'block';
+  } catch (error_) {
+    console.error('Fallo el envío de las respuestas:', error_);
+    alert('No pudimos enviar tus respuestas. Intenta de nuevo en unos minutos.');
+    boton.disabled = false;
+    boton.textContent = 'Enviar respuestas';
+  }
+});
+
 /* Cuenta esta visita en el contador global y muestra el total actualizado */
 try {
   const resVisitas = await fetch(`${APPS_SCRIPT_URL}?accion=contador&clave=visitas`);
