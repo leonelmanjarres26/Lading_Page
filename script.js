@@ -1,6 +1,6 @@
 /* Google Apps Script conectado a la Google Sheet: guarda los registros del piloto
    y lleva los contadores globales (visitas, registros, feedback) compartidos entre todos los visitantes. */
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxJNMMKkaWySG7RbGBwa45rKT4kL8DvVsnBHgNJXLXloNroSEx2iNhH9qqjAz3qotqTsg/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxiVOWLDuzHnzL_yrcyaUBlQivP6YiljGxq6g5VN9FxTPUqxnpxQdO3R7WFmHIzHmhjzg/exec';
 
 function animar(id, valor){
   let el = document.getElementById(id), n = 0;
@@ -8,26 +8,39 @@ function animar(id, valor){
   let t = setInterval(()=>{ n += paso; if(n>=valor){n=valor;clearInterval(t);} el.textContent = n; }, 30);
 }
 
-/* Cuenta esta visita en el contador global y muestra el total actualizado */
-try {
-  const resVisitas = await fetch(`${APPS_SCRIPT_URL}?accion=contador&clave=visitas`);
-  const dataVisitas = await resVisitas.json();
-  animar('cVis', dataVisitas.valor);
-} catch (error_) {
-  console.warn('No se pudo actualizar el contador de visitas:', error_);
+/* Copiar enlace */
+function copiarLink(e){
+  e.preventDefault();
+  navigator.clipboard.writeText(globalThis.location.href).then(()=>{
+    e.target.textContent = '¡Enlace copiado!';
+    setTimeout(()=>{ e.target.textContent = 'Copiar enlace'; }, 2000);
+  });
 }
 
-/* Muestra los contadores actuales de registros y feedback (sin incrementarlos) */
-try {
-  const resContadores = await fetch(`${APPS_SCRIPT_URL}?accion=obtener`);
-  const dataContadores = await resContadores.json();
-  animar('cReg', dataContadores.contadores.registros || 0);
-  animar('cFb', dataContadores.contadores.feedback || 0);
-} catch (error_) {
-  console.warn('No se pudieron cargar los contadores:', error_);
+/* Feedback (👍/👎): también es un contador global vía Apps Script */
+async function darFeedback(e, tipo){
+  e.preventDefault();
+  document.querySelectorAll('.fb-btn').forEach(b => b.disabled = true);
+  try {
+    const res = await fetch(`${APPS_SCRIPT_URL}?accion=contador&clave=feedback`);
+    const data = await res.json();
+    animar('cFb', data.valor);
+  } catch (error_) {
+    console.warn('No se pudo actualizar el contador de feedback:', error_);
+  } finally {
+    document.getElementById('fbGracias').style.display = 'block';
+  }
 }
 
-/* Formulario Hero: envía nombre y correo a la Google Sheet vía Apps Script */
+/* Este archivo es un módulo ES (para poder usar await de nivel superior más abajo), así que
+   sus funciones no son globales por defecto. Se exponen aquí, ANTES de cualquier await, porque
+   el HTML las invoca con onclick="" y podrían dispararse mientras el módulo sigue cargando. */
+globalThis.copiarLink = copiarLink;
+globalThis.darFeedback = darFeedback;
+
+/* Formulario Hero: envía nombre y correo a la Google Sheet vía Apps Script.
+   Se registra antes de los await de abajo para que el envío nunca dependa de que
+   esas llamadas hayan terminado. */
 document.getElementById('formRegistro').addEventListener('submit', async function(e){
   e.preventDefault();
   const form = e.target;
@@ -49,38 +62,28 @@ document.getElementById('formRegistro').addEventListener('submit', async functio
     form.style.display = 'none';
     document.getElementById('okMsg').style.display = 'block';
   } catch (error_) {
+    console.error('Fallo el envío del registro:', error_);
     alert('No pudimos enviar tu registro. Intenta de nuevo en unos minutos.');
     boton.disabled = false;
     boton.textContent = 'Quiero la demostración gratis';
   }
 });
 
-/* Feedback (👍/👎): también es un contador global vía Apps Script */
-async function darFeedback(e, tipo){
-  e.preventDefault();
-  document.querySelectorAll('.fb-btn').forEach(b => b.disabled = true);
-  try {
-    const res = await fetch(`${APPS_SCRIPT_URL}?accion=contador&clave=feedback`);
-    const data = await res.json();
-    animar('cFb', data.valor);
-  } catch (error_) {
-    console.warn('No se pudo actualizar el contador de feedback:', error_);
-  } finally {
-    document.getElementById('fbGracias').style.display = 'block';
-  }
+/* Cuenta esta visita en el contador global y muestra el total actualizado */
+try {
+  const resVisitas = await fetch(`${APPS_SCRIPT_URL}?accion=contador&clave=visitas`);
+  const dataVisitas = await resVisitas.json();
+  animar('cVis', dataVisitas.valor);
+} catch (error_) {
+  console.warn('No se pudo actualizar el contador de visitas:', error_);
 }
 
-/* Copiar enlace */
-function copiarLink(e){
-  e.preventDefault();
-  navigator.clipboard.writeText(globalThis.location.href).then(()=>{
-    e.target.textContent = '¡Enlace copiado!';
-    setTimeout(()=>{ e.target.textContent = 'Copiar enlace'; }, 2000);
-  });
+/* Muestra los contadores actuales de registros y feedback (sin incrementarlos) */
+try {
+  const resContadores = await fetch(`${APPS_SCRIPT_URL}?accion=obtener`);
+  const dataContadores = await resContadores.json();
+  animar('cReg', dataContadores.contadores.registros || 0);
+  animar('cFb', dataContadores.contadores.feedback || 0);
+} catch (error_) {
+  console.warn('No se pudieron cargar los contadores:', error_);
 }
-
-/* Este archivo es un módulo ES (para poder usar await de nivel superior), así que
-   sus funciones no son globales por defecto. Se exponen aquí porque el HTML las
-   invoca directamente con onclick="". */
-globalThis.copiarLink = copiarLink;
-globalThis.darFeedback = darFeedback;
